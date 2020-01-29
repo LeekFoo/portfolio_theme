@@ -1,0 +1,25 @@
+@charset "UTF-8";
+/*
+theme Name: LeekFoo's Portfolio
+Author: LeekFoo
+Description: original theme
+version： 0.0.1
+*/
+/** Common **/
+html {
+  font-size: 16px; }
+
+body {
+  font-family: 'メイリオ', 'Meiryo', 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', 'Noto Sans Japanese', Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+  color: #333; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #000; }
+
+img {
+  max-width: 100%;
+  height: auto; }
