@@ -1,10 +1,7 @@
 @charset "utf-8";
 
 /*
-theme Name: LeekFoo's Portfolio
-Author: LeekFoo
-Description: original theme
-version： 0.0.1
+Theme Name: Original Portfolio Theme
 */
 
 $breakpoints: (
@@ -64,13 +61,13 @@ img {
 .container {
   padding: 2rem 1.25rem;
 }
- 
+
 .container:after {
   display: block;
   clear: both;
   content: '';
 }
- 
+
 .contents {
   float: left;
   width: 70%;
@@ -82,7 +79,7 @@ img {
     margin-bottom: 1.5rem;
   }
 }
- 
+
 .sidebar {
   float: left;
   width: 27%;
@@ -96,7 +93,7 @@ img {
 .site-title-wrap {
   text-align: left;
 }
- 
+
 .site-title a {
   font-size: 2.4rem;
   font-weight: bold;
@@ -109,7 +106,7 @@ img {
 .header-inner {
   position: relative;
 }
- 
+
 .navbutton {
   display: none;
   @include mq() {
@@ -158,7 +155,7 @@ img {
       margin-right: 0;
   }
 }
- 
+
 .header-nav li a {
   font-weight: bold;
   display: block;
@@ -170,7 +167,7 @@ img {
       color: #fff;
   }
 }
- 
+
 .header-nav li a:hover {
     opacity: .6;
 }
@@ -247,45 +244,50 @@ img {
   margin: 2rem 0;
   text-align: center;
 }
- 
+
 .pagination ul {
   font-size: 0;
 }
- 
+
 .pagination ul li {
   font-size: 1rem;
   display: inline-block;
   margin-right: .5rem;
 }
- 
+
 .pagination ul li:last-child {
   border: 0;
 }
- 
+
 .pagination ul li a,
 .pagination .current {
   display: block;
   padding: .5rem .8rem;
   border: 1px solid #ccc;
 }
- 
+
 .pagination ul li .prev,
 .pagination ul li .next {
   border: 0;
 }
- 
+
 .pagination ul li a {
   text-decoration: none;
   color: #333;
 }
- 
+
 .pagination ul li a:hover {
   opacity: .6;
 }
- 
+
 .pagination .current {
   color: #fff;
   background-color: #03162f;
+}
+
+/** お問い合わせフォーム **/
+.form-group {
+  text-align: left;
 }
 
 @include mq() {

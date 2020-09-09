@@ -12,37 +12,12 @@
     ?>
     <div id="contact" class="section valign-wrapper center-align">
 			<div class="container">
-				<h3>連絡先</h3>
-				<p>
-                    何かございましたらメールからご連絡ください。<br>
-					negi.44193&nbsp;<i class="fas fa-at"></i>&nbsp;gmail.com
+				<h3>お問い合わせ</h3>
+				<p class="email-wrapper">
+                    何かございましたら下記メールアドレス、もしくはお問い合わせフォームからご連絡ください。<br>
+					<span class="email-addr">negi.44193&nbsp;<i class="fas fa-at"></i>&nbsp;gmail.com</span>
 				</p>
-
-<!--
-				<div class="row">
-					<form class="col s12">
-						<div class="row">
-							<div class="input-field col s12 m6">
-								<input id="name" type="text" class="validate">
-								<label for="name">お名前</label>
-							</div>
-                            <div class="input-field col s12 m6">
-								<input id="email" type="email" class="validate">
-								<label for="email">E-mail</label>
-							</div>
-						</div>
-                        <div class="row">
-							<div class="input-field col s12">
-								<textarea id="content" class="materialize-textarea"></textarea>
-								<label for="content">内容</label>
-							</div>
-						</div>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                            <i class="far fa-paper-plane"></i>
-                        </button>
-					</form>
-				</div>
--->
+				<?php echo do_shortcode( '[contact-form-7 id="21" title="contact"]' ); ?>
 			</div>
 		</div>
         <div class="copyright">
@@ -56,10 +31,4 @@
 </div>
 <?php wp_footer(); ?>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/custom.js"></script>
 </html>

@@ -3,6 +3,11 @@
 		<div id="top_title" class="valign-wrapper teal lighten-3">
 		    <?php include("index_firstview.php"); ?>
 		</div>
+        <?php
+            $profilePage = get_page_by_path('profile');
+            $profile = get_post($profilePage);
+            $profileContent = $profile -> post_content;
+        ?>
 		<div id="about" class="section valign-wrapper" data-aos="fade-up">
 			<div class="container">
                 <div id="profile">
@@ -12,10 +17,14 @@
                             <img class="responsive-img circle" alt="プロフィール画像" src="<?php echo get_template_directory_uri(); ?>/img/profile.png">
                         </div>
                         <div class="col s12 m8 mt20">
+                        <?php if($profileContent) : ?>
+                            <?php echo apply_filters('the_content', $profileContent); ?>
+                        <?php else: ?>
                             LeekFooと申します。<br>
                             これまで約3年間Web業界でWebプログラマとして勤務し、LAMP環境で動作するWebアプリケーションやソーシャルゲームの開発を行ってきました。<br>
                             仕事ではPHPを使用することが多いですが、最近は競技プログラミングを始め、C++の勉強もしています。<br>
                             近頃はクラウドIDEを使用した開発環境構築の虜です。<br><br>
+                        <?php endif; ?>
                             <a class="valign-wrapper profile_account" href="https://github.com/LeekFoo" target="_blank"><i class="fab fa-github fa-3x"></i>LeekFoo</a>
                         </div>
                     </div>
@@ -23,23 +32,107 @@
 			</div>
 		</div>
 
+        <?php
+        $workPosts = get_posts(array(
+            'post_type' => 'post', // 投稿タイプ
+            'category_name' => 'works', // カテゴリをスラッグで指定する場合
+            'posts_per_page' => 6, // 表示件数
+            'orderby' => 'date', // 表示順の基準
+            'order' => 'DESC' // 昇順・降順
+        ));
+
+        ?>
+
+
         <div id="portfolio_projects" class="section valign-wrapper" data-aos="fade-up">
 			<div class="container">
 				<h3 class="center-align">制作物</h3>
                 <div class="row">
-                    <?php
-                        $post_ids = get_posts([
-                            'posts_per_page'=> 6,
-                            'fields'        => 'ids',
-                            'category_name' => 'product',
-                        ]);
-                        echo get_top_products($post_ids);
-                    ?>
+                <?php // TODO 制作物タグが付いてい投稿のみを表示するようにする ?>
+                <?php
+                    if($workPosts):
+                        foreach($workPosts as $id => $post):
+                            $tags = get_the_tags();
+                            $tagName = null;
+                            if ( !empty( $tags ) ) {
+                                $tagName = $tags[0]->name;
+                            }
+                ?>
+                    <div class="col s12 m4">
+                        <div class="card hoverable modal-trigger" data-target="product_<?php echo $id; ?>">
+                            <?php if($tagName) { ?>
+                                <span class="product-tag"><?php echo $tagName; ?></span>
+                            <?php } ?>
+                            <div class="card-image">
+                                <img src="<?php echo get_the_post_thumbnail_url( get_the_ID(), 'medium' ); ?>" />
+                                <span class="card-title"><?php the_title(); ?></span>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; endif; ?>
 				</div>
 			</div>
 		</div>
-		
-		<?php echo get_top_product_details($post_ids); ?>
+
+
+        <?php
+            if($workPosts):
+                foreach($workPosts as $id => $post):
+        ?>
+        <!-- 制作物<?php echo $id; ?> -->
+        <div id="product_<?php echo $id; ?>" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s12 m5">
+                        <h4><?php the_title(); ?></h4>
+                        <div class="description mb30">
+                            <?php the_field('work_description'); ?>
+                            <?php
+                                $demoUrl = get_field('demo_url');
+                                $githubUrl = get_field('github_url');
+
+                                if( $demoUrl || $githubUrl ):
+                            ?>
+                            <ul>
+                                <?php if($demoUrl): ?>
+                                <li><a href="<?php echo $demoUrl; ?>" target="_blank"><i class="fas fa-desktop"></i>Demo</a></li>
+                                <?php endif; ?>
+                                <?php if($githubUrl): ?>
+                                <li><a href="<?php echo $githubUrl; ?>" target="_blank"><i class="fab fa-github"></i>github</a></li>
+                                <?php endif; ?>
+                            </ul>
+                            <?php endif; ?>
+                        </div>
+                        <h5>開発環境</h5>
+                        <div class="description">
+                            <?php the_field('dev_tool'); ?>
+                        </div>
+                    </div>
+                    <?php
+                        $imageGet = preg_match_all( '/<img.+class=[\'"].*wp-image-([0-9]+).*[\'"].*>/i', $post->post_content, $matches );
+                        $imageIds = $matches[1];
+                    ?>
+                    <?php if(!empty($imageIds)): ?>
+                    <div class="col s12 m7">
+                        <ul class="modal_images">
+                        <?php
+                            foreach ($imageIds as $key => $imgId) :
+                        ?>
+                            <li><img src="<?php echo wp_get_attachment_thumb_url($imgId); ?>" /></li>
+                        <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <?php else: ?>
+                        <div>
+                            この作品にはサンプル画像はございません。
+                        </div>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="fas fa-times"></i></a>
+        </div>
+        <?php endforeach; endif; ?>
 
 		<div id="portfolio_skill" class="section valign-wrapper" data-aos="fade-up">
 			<div class="container">
